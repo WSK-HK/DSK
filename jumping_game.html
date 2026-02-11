@@ -19,7 +19,7 @@
     /*background*/
     #sky{
         position: absolute;
-        background: rgba(135, 206, 235, 1);
+        background: linear-gradient(to right, rgb(248, 232, 90), transparent, rgb(235, 65, 93));
         left: 0px;
         top: 0px;
         width:100%;
@@ -29,7 +29,7 @@
 
     #ground{
         position: absolute;
-        background: rgba(34, 139, 34, 1);
+        background: radial-gradient(circle, yellow, rgb(192, 231, 255));
         left: 0px;
         top: 500px;
         width:100%;
@@ -67,7 +67,7 @@
     #player{
         position: absolute;
         transform: translateY(0px);
-        top:320px;
+        top: 300px;
         left:30px;
         animation-name: none;
         animation-timing-function: ease-in-out ;
@@ -151,6 +151,7 @@
         function makeObstacle() {
 
             // You need to show the obstacle and start the animation here
+            
         }
 
         // Make the player jump by starting the player animation
@@ -164,7 +165,7 @@
             $(document).on("keydown", function(e) {
                 // The player jumps if the spacebar key is down
                 if (e.keyCode == 32){
-
+                    $("#player").css("animation-name", "playerAnimation")
                 }
             });
 
@@ -185,8 +186,9 @@
 
             // The player animation has finished
             $("#player").on("animationend", function() {
-
+   
                 // You need to stop the animation here
+                $("#player").css("animation-name", "none")
             });
 
             // Start the obstacle animation
@@ -216,7 +218,7 @@
         </div>
 
         <div id="player">
-            <img src="https://www.clipartmax.com/png/middle/11-112864_real-plankton-cliparts-spongebob-characters.png" width="150" height="220"/>
+            <img src="images.jpg" width="150" height="220"/>
         </div>
         
         <div id="score">
