@@ -19,7 +19,7 @@
     /*background*/
     #sky{
         position: absolute;
-        background: linear-gradient(to right, rgb(248, 232, 90), transparent, rgb(235, 65, 93));
+        background: linear-gradient(to right, rgb(226, 212, 83), transparent, rgb(110, 236, 234));
         left: 0px;
         top: 0px;
         width:100%;
@@ -29,8 +29,7 @@
 
     #ground{
         position: absolute;
-        background: radial-gradient(circle, yellow, rgb(192, 231, 255));
-        left: 0px;
+        background: radial-gradient(circle, rgb(78, 219, 60), rgb(2, 104, 35));
         top: 500px;
         width:100%;
         height:300px;
@@ -45,12 +44,14 @@
         top: 100px;
         animation-name: cloudAnimation;
         animation-timing-function: linear;
-        animation-duration: 10s;
+        animation-duration: 4s;
         animation-iteration-count: infinite;
         overflow-x: hidden;
     }
 
     #cloud2{
+        transform: translateX(1000px);
+        animation-delay: 2s;
     }
 
     #obstacle{
@@ -59,7 +60,7 @@
         display: none;
         animation-name: none;
         animation-timing-function: linear;
-        animation-duration: 3s;
+        animation-duration: 2s;
         animation-iteration-count: 1;
         overflow-x: hidden;
     }
@@ -71,7 +72,7 @@
         left:30px;
         animation-name: none;
         animation-timing-function: ease-in-out ;
-        animation-duration: 0.8s;
+        animation-duration: 1.0s;
         animation-iteration-count: 1;
     }
 
@@ -89,9 +90,9 @@
         font-size: 6rem;
         display: none;
         animation-name: none;
-        animation-duration: 0.2s;
+        animation-duration: 0.4s;
         animation-timing-function: linear;
-        animation-iteration-count: 3;
+        animation-iteration-count: 6;
     }
 
     #score{
@@ -114,7 +115,7 @@
 
     @keyframes playerAnimation{
         0%  {transform: translateY(0px);}
-        50% {transform: translateY(-160px);}
+        50% {transform: translateY(-140px);}
         100%{transform: translateY(0px);}
     }
 
@@ -126,6 +127,7 @@
     </style>
     <script>
         let Obstacle_time = 3;
+        let score = 0;
         // Check whether the game is over if the player is near the obstacle
         function checkGameover() {
 
@@ -145,13 +147,19 @@
             }else{
                 setTimeout(checkGameover, 50);
             }
+
+            if(obstacleX<180 && obstacleX>45){
+                score += Math.floor(Math.random() * 200);
+                $("#score-value").html(score)
+            }
         }
 
         // Make an obstacle by starting the obstacle animation
         function makeObstacle() {
 
             // You need to show the obstacle and start the animation here
-            
+            $("#obstacle").show();
+            $("#obstacle").css("animation-name","obstacleAnimation");
         }
 
         // Make the player jump by starting the player animation
@@ -173,8 +181,9 @@
             $("#obstacle").on("animationend", function() {
 
                 // You need to hide the obstacle and stop the animation here
-
-                // You will make another obstacle later
+                $("#obstacle").hide();
+                $("#obstacle").css("animation-name","none");
+                // You will make another obstacle  later
                 // Obstacle Move faster
                 if(Obstacle_time>1){
                     Obstacle_time -= 0.5;
@@ -218,7 +227,7 @@
         </div>
 
         <div id="player">
-            <img src="images.jpg" width="150" height="220"/>
+            <img src="images_4.jpg" width="180" height="160"/>
         </div>
         
         <div id="score">
